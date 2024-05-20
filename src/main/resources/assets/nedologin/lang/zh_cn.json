@@ -1,0 +1,15 @@
+{
+  "nedologin.command.error.entry_not_found": "不存在名叫 %s 的注册玩家",
+  "nedologin.command.about.info": "Nedologin 版本 %s ，Minecraft 版本 1.20.1",
+  "nedologin.command.plugin.not_found": "插件不存在: %s",
+  "nedologin.command.plugin.already_loaded": "插件已被加载: %s",
+  "nedologin.command.plugin.load_success": "插件加载成功: %s",
+  "nedologin.command.plugin.not_loaded": "插件未被加载: %s",
+  "nedologin.command.plugin.unload_success": "插件卸载成功: %s",
+  "nedologin.command.plugin.available_plugin_header": "可用插件列表：",
+  "nedologin.command.plugin.loaded_plugin_header": "已加载插件列表：",
+  "nedologin.command.plugin.list_member": " - %s",
+  "nedologin.info.password_change_successful": "密码修改成功。",
+  "nedologin.info.password_change_fail": "密码修改失败。",
+  "nedologin.password.title": "Nedologin 密码设置"
+}

@@ -1,0 +1,15 @@
+{
+  "nedologin.command.error.entry_not_found": "Запись игрока %s не существует",
+  "nedologin.command.about.info": "Nedologin версия %s для Minecraft 1.20.1",
+  "nedologin.command.plugin.not_found": "Плагин не найден: %s",
+  "nedologin.command.plugin.already_loaded": "Плагин уже загружен: %s",
+  "nedologin.command.plugin.load_success": "Успешно загружен плагин: %s",
+  "nedologin.command.plugin.not_loaded": "Плагин ещё не загружен: %s",
+  "nedologin.command.plugin.unload_success": "Успешно выгружен плагин: %s",
+  "nedologin.command.plugin.available_plugin_header": "Список доступных плагинов:",
+  "nedologin.command.plugin.loaded_plugin_header": "Список загруженных плагинов:",
+  "nedologin.command.plugin.list_member": " - %s",
+  "nedologin.info.password_change_successful": "Пароль сменён успешно.",
+  "nedologin.info.password_change_fail": "Не удалось сменить пароль.",
+  "nedologin.password.title": "Запишите пароль"
+}

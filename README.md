@@ -47,7 +47,7 @@ provider".
 Each storage provider has its unique resource location (e.g. `simplelogin:file`) to identify itself.
 
 Simple Login itself provides two storage providers: `file` and `sqlite`.
-
+  
 ### File storage provider
 
 ResourceLocation: `simplelogin:file`
@@ -70,9 +70,9 @@ and `META-INF/services` directories into Simple Login mod jar.
 
 If you're familiar with Java and forge mods, it won't be very hard.
 
-You need to implement the `top.seraphjack.simplelogin.server.storage.StorageProvider` interface, and register your own
+You need to implement the `storage.server.ru.marduk.nedologin.StorageProvider` interface, and register your own
 provider before the server starts by
-calling `top.seraphjack.simplelogin.server.SLRegistries.STORAGE_PROVIDERS::register`.
+calling `server.ru.marduk.nedologin.SLRegistries.STORAGE_PROVIDERS::register`.
 
 ## Simple Login plugins
 

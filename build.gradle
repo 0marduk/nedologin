@@ -1,24 +1,25 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
+plugins {
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
-apply plugin: 'net.minecraftforge.gradle'
 
 version = '1.0.2'
-group = 'top.seraphjack'
-archivesBaseName = 'SimpleLogin-1.20.1'
+group = 'ru.marduk'
+archivesBaseName = 'Nedologin-1.20.1'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 jarJar.enable()
 
+tasks.named("jarJar") {
+    finalizedBy 'reobfJarJar'
+}
+
 minecraft {
-    mappings channel: 'official', version: '1.20.1'
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+
     runs {
         client {
             workingDirectory project.file('run')
@@ -28,7 +29,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                simplelogin {
+                nedologin {
                     source sourceSets.main
                 }
             }
@@ -42,7 +43,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                simplelogin {
+                nedologin {
                     source sourceSets.main
                 }
             }
@@ -56,10 +57,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'simplelogin', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'nedologin', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                simplelogin {
+                nedologin {
                     source sourceSets.main
                 }
             }
@@ -72,14 +73,24 @@ configurations {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.1-47.1.46'
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
 
-    jarJar 'org.mindrot:jbcrypt:[0.4,0.5)'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    jarJar 'at.favre.lib:bytes:[1.0,1.6)'
+    jarJar 'at.favre.lib:bcrypt:[0.4,0.5)'
+}
+
+mixin {
+    add sourceSets.main, 'mixins.nedologin.refmap.json'
+
+    config 'mixins.nedologin.json'
 }
 
 allprojects {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+
         mavenCentral()
     }
 }
@@ -101,8 +112,8 @@ tasks.jar.mustRunAfter(processResources)
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "SimpleLogin",
-                "Specification-Vendor"    : "SeraphJACK",
+                "Specification-Title"     : "Nedologin",
+                "Specification-Vendor"    : "marduk",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
@@ -110,4 +121,10 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }

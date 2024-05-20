@@ -1,0 +1,15 @@
+{
+  "nedologin.command.error.entry_not_found": "Não existe um registro para o jogador %s",
+  "nedologin.command.about.info": "Nedologin versão %s para Minecraft 1.20.1",
+  "nedologin.command.plugin.not_found": "Plugin não encontrado: %s",
+  "nedologin.command.plugin.already_loaded": "O plugin já está carregado: %s",
+  "nedologin.command.plugin.load_success": "Plugin carregado com sucesso: %s",
+  "nedologin.command.plugin.not_loaded": "O plugin não está carregado: %s",
+  "nedologin.command.plugin.unload_success": "Plugin desativado com sucesso: %s",
+  "nedologin.command.plugin.available_plugin_header": "Lista dos plugins disponíveis:",
+  "nedologin.command.plugin.loaded_plugin_header": "Listas dos plugins carregados:",
+  "nedologin.command.plugin.list_member": " - %s",
+  "nedologin.info.password_change_successful": "A senha foi alterada com sucesso.",
+  "nedologin.info.password_change_fail": "A alteração de senha falhou.",
+  "nedologin.password.title": "Configuração de senha do Nedologin"
+}
