@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import ru.marduk.nedologin.Nedologin;
 
 import java.net.SocketAddress;
 
@@ -24,6 +25,7 @@ public class MixinPlayerManager {
 
         if (onlinePlayer != null) {
             cir.setReturnValue(Component.literal("Выпей йаду придурок"));
+            Nedologin.logger.warn("Someone tried to log in as an already present player {}", pGameProfile.getName());
         }
     }
 }
