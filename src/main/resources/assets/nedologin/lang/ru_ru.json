@@ -11,5 +11,6 @@
   "nedologin.command.plugin.list_member": " - %s",
   "nedologin.info.password_change_successful": "Пароль сменён успешно.",
   "nedologin.info.password_change_fail": "Не удалось сменить пароль.",
-  "nedologin.password.title": "Запишите пароль"
+  "nedologin.password.title": "Запишите пароль",
+  "nedologin.info.password_change_disabled": "Смена паролей отключена на этом сервере."
 }

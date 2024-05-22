@@ -15,6 +15,8 @@ public final class NLConfig {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> autoRegister;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> enableChangePassword;
+
         public final ForgeConfigSpec.ConfigValue<String> storageProvider;
 
         public final ForgeConfigSpec.IntValue defaultGameType;
@@ -27,6 +29,10 @@ public final class NLConfig {
             autoRegister = builder
                     .comment("Automatically register players (disable this if you choose to register players differently)")
                     .define("autoRegister", true);
+
+            enableChangePassword = builder
+                    .comment("Should the player be able to change the password?")
+                    .define("enableChangePassword", true);
 
             secs = builder
                     .comment("Login Timeout(s)")

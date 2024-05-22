@@ -11,5 +11,6 @@
   "nedologin.command.plugin.list_member": " - %s",
   "nedologin.info.password_change_successful": "A senha foi alterada com sucesso.",
   "nedologin.info.password_change_fail": "A alteração de senha falhou.",
-  "nedologin.password.title": "Configuração de senha do Nedologin"
+  "nedologin.password.title": "Configuração de senha do Nedologin",
+  "nedologin.info.password_change_disabled": "Password changing is disabled on this server."
 }

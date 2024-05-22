@@ -88,14 +88,9 @@ public final class PlayerLoginHandler {
         loginList.remove(login);
 
         if (!NLStorage.instance().storageProvider.registered(id)) {
-            if (NLConfig.SERVER.autoRegister.get()) {
-                NLStorage.instance().storageProvider.register(id, pwd);
-                Nedologin.logger.info("Player {} has successfully registered.", id);
-                postLogin(player, login);
-            } else {
-                Nedologin.logger.warn("Player {} tried to register (automatic registration is disabled)", id);
-                player.connection.disconnect(Component.literal("Automatic registration is disabled on this server."));
-            }
+            NLStorage.instance().storageProvider.register(id, pwd);
+            Nedologin.logger.info("Player {} has successfully registered.", id);
+            postLogin(player, login);
         } else if (NLStorage.instance().storageProvider.checkPassword(id, pwd)) {
             Nedologin.logger.info("Player {} has successfully logged in.", id);
             postLogin(player, login);

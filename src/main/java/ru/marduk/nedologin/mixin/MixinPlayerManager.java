@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import ru.marduk.nedologin.NLConfig;
 import ru.marduk.nedologin.Nedologin;
+import ru.marduk.nedologin.server.storage.NLStorage;
 
 import java.net.SocketAddress;
 
@@ -24,8 +26,14 @@ public class MixinPlayerManager {
         ServerPlayer onlinePlayer = playerList.getPlayerByName(pGameProfile.getName());
 
         if (onlinePlayer != null) {
-            cir.setReturnValue(Component.literal("Выпей йаду придурок"));
+            cir.setReturnValue(Component.literal("Someone is already playing with that nickname."));
             Nedologin.logger.warn("Someone tried to log in as an already present player {}", pGameProfile.getName());
+        }
+
+        if (!NLStorage.instance().storageProvider.registered(pGameProfile.getName()) && !NLConfig.SERVER.autoRegister.get()) {
+            // this sounds like that one ""
+            Nedologin.logger.warn("Player {} tried to register (automatic registration is disabled)", pGameProfile.getName());
+            cir.setReturnValue(Component.literal("Automatic registration is disabled on this server."));
         }
     }
 }

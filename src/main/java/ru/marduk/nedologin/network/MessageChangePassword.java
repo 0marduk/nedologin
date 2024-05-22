@@ -2,8 +2,10 @@ package ru.marduk.nedologin.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.repository.Pack;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
+import ru.marduk.nedologin.NLConfig;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.storage.NLStorage;
 import ru.marduk.nedologin.utils.SHA256;
@@ -37,6 +39,20 @@ public class MessageChangePassword {
         NetworkEvent.Context context = ctx.get();
         assert context.getSender() != null;
         String username = Objects.requireNonNull(ctx.get().getSender()).getGameProfile().getName();
+
+        if (!NLConfig.SERVER.enableChangePassword.get()) {
+            context.getSender().displayClientMessage(
+                    Component.translatable("nedologin.info.password_change_disabled"),
+                    false
+            );
+
+            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(context::getSender), new MessageChangePasswordResponse(false));
+
+            context.setPacketHandled(true);
+
+            return;
+        }
+
         if (NLStorage.instance().storageProvider.checkPassword(username, msg.original)) {
             NLStorage.instance().storageProvider.changePassword(username, msg.to);
             context.getSender().displayClientMessage(
