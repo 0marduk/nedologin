@@ -2,10 +2,9 @@ package ru.marduk.nedologin.server.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.marduk.nedologin.NLConfig;
+import ru.marduk.nedologin.NLConstants;
 import ru.marduk.nedologin.Nedologin;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class StorageProviderMariaDB extends StorageProviderSQL {
@@ -64,7 +62,16 @@ public class StorageProviderMariaDB extends StorageProviderSQL {
         }
     }
 
-    public StorageProviderMariaDB() throws SQLException, IOException {
+    public StorageProviderMariaDB() throws SQLException {
         super(DriverManager.getConnection("jdbc:mariadb://" + config.sqlHost + ":" + config.sqlPort + "/" + config.sqlDatabase, config.sqlUser, config.sqlPassword));
+    }
+
+    @Override
+    protected void checkValidity() throws SQLException {
+        if (!super.conn.isValid(NLConstants.MARIADB_TIMEOUT)) {
+            // Close the connection and make a new one with the same parameters
+            super.conn.close();
+            super.conn = DriverManager.getConnection("jdbc:mariadb://" + config.sqlHost + ":" + config.sqlPort + "/" + config.sqlDatabase, config.sqlUser, config.sqlPassword);
+        }
     }
 }

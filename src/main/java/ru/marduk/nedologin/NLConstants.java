@@ -7,4 +7,5 @@ public final class NLConstants {
     public static final LevelResource NL_ENTRY = new LevelResource("nl_entries.dat");
     public static final int MAX_PASSWORD_LENGTH = 100;
     public static final int BCRYPT_COST = 10;
+    public static final int MARIADB_TIMEOUT = 10;
 }

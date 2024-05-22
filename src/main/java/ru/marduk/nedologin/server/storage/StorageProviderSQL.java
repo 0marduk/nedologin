@@ -13,8 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class StorageProviderSQL implements StorageProvider {
-    private final Connection conn;
+public abstract class StorageProviderSQL implements StorageProvider {
+    protected Connection conn;
 
     public StorageProviderSQL(Connection conn) {
         this.conn = conn;
@@ -36,6 +36,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public boolean checkPassword(String username, String password) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("""
                     SELECT password
                     FROM nl_entries
@@ -54,6 +55,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public void unregister(String username) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("""
                     DELETE
                     FROM nl_entries
@@ -68,6 +70,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public boolean registered(String username) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("SELECT EXISTS(SELECT * from nl_entries WHERE username = ?)");
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
@@ -82,6 +85,7 @@ public class StorageProviderSQL implements StorageProvider {
     public void register(String username, String password) {
         if (registered(username)) return;
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("INSERT INTO nl_entries (username, password, defaultGameType)\n" +
                     "VALUES (?, ?, ?)");
             st.setString(1, username);
@@ -101,6 +105,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public GameType gameType(String username) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("""
                     SELECT defaultGameType
                     FROM nl_entries
@@ -118,6 +123,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public void setGameType(String username, GameType gameType) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("""
                     UPDATE nl_entries
                     SET defaultGameType=?
@@ -133,6 +139,7 @@ public class StorageProviderSQL implements StorageProvider {
     @Override
     public void changePassword(String username, String newPassword) {
         try {
+            checkValidity();
             PreparedStatement st = conn.prepareStatement("""
                     UPDATE nl_entries
                     SET password=?
@@ -164,5 +171,10 @@ public class StorageProviderSQL implements StorageProvider {
             Nedologin.logger.error("Error looking up entry", ex);
         }
         return builder.build();
+    }
+
+    // Reconnects the server to the database in case the connection becomes invalid
+    protected void checkValidity() throws SQLException {
+        // Literally nothing
     }
 }
