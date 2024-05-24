@@ -30,9 +30,12 @@ public final class EventHandler {
         if (gui instanceof TitleScreen) {
             Button buttonSetPassword;
 
-            buttonSetPassword = Button.builder(Component.literal("P"),
+            buttonSetPassword = new Button(5, 5, 20, 20, Component.literal("P"), btn -> Minecraft.getInstance().setScreen(new SetPasswordScreen(gui)));
+
+            /*buttonSetPassword = Button(Component.literal("P"),
                     btn -> Minecraft.getInstance().setScreen(new SetPasswordScreen(gui)))
-                    .bounds(5, 5, 20, 20).build();
+                    .bounds(5, 5, 20, 20).build();*/
+
             gui.addRenderableWidget(buttonSetPassword);
         }
     }

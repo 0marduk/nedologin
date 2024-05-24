@@ -1,13 +1,13 @@
 plugins {
     id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = '1.0.6'
 group = 'ru.marduk'
-archivesBaseName = 'Nedologin-1.20.1'
+archivesBaseName = 'Nedologin-1.19.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -18,7 +18,7 @@ tasks.named("jarJar") {
 }
 
 minecraft {
-    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
@@ -74,7 +74,7 @@ configurations {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.3.0'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 

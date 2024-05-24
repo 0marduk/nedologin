@@ -40,7 +40,7 @@ public final class ProtectCoord implements HandlerPlugin {
                 final Position pos = new Position(player.getX(), player.getY(), player.getZ());
                 player.getCapability(CapabilityLoader.CAPABILITY_LAST_POS).ifPresent(c -> c.setLastPos(pos));
             }
-            BlockPos spawnPoint = player.serverLevel().getSharedSpawnPos();
+            BlockPos spawnPoint = player.getLevel().getSharedSpawnPos();
             player.setPos(spawnPoint.getX(), spawnPoint.getY(), spawnPoint.getZ());
         } catch (Exception ex) {
             Nedologin.logger.error("Fail to set player position to spawn point when logging out.", ex);
