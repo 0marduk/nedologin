@@ -12,5 +12,6 @@
   "nedologin.info.password_change_successful": "Password changed successfully.",
   "nedologin.info.password_change_fail": "Password change failed.",
   "nedologin.password.title": "Nedologin Password Setting",
-  "nedologin.info.password_change_disabled": "Password changing is disabled on this server."
+  "nedologin.info.password_change_disabled": "Password changing is disabled on this server.",
+  "nedologin.password": "Password"
 }

@@ -44,7 +44,12 @@ public final class SetPasswordScreen extends Screen {
         this.buttonComplete = this.addWidget(Button.builder(CommonComponents.GUI_DONE, btn -> {
             String password = this.password.getValue();
             if (!password.isEmpty()) {
-                PasswordHolder.instance().initialize(password);
+                if (PasswordHolder.instance().initialized()) {
+                    PasswordHolder.instance().setPendingPassword(password);
+                    PasswordHolder.instance().applyPending();
+                } else {
+                    PasswordHolder.instance().initialize(password);
+                }
                 Minecraft.getInstance().setScreen(parentScreen);
             }
         }).bounds(this.width / 2 - 100, this.height / 2 + 40, 200, 20).build());

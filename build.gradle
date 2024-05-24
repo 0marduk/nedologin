@@ -5,7 +5,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '1.0.5'
+version = '1.0.6'
 group = 'ru.marduk'
 archivesBaseName = 'Nedologin-1.20.1'
 
@@ -19,6 +19,7 @@ tasks.named("jarJar") {
 
 minecraft {
     mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {

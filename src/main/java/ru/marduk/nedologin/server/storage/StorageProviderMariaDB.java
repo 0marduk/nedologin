@@ -70,6 +70,7 @@ public class StorageProviderMariaDB extends StorageProviderSQL {
     protected void checkValidity() throws SQLException {
         if (!super.conn.isValid(NLConstants.MARIADB_TIMEOUT)) {
             // Close the connection and make a new one with the same parameters
+            Nedologin.logger.warn("MariaDB connection dropped; reconnecting.");
             super.conn.close();
             super.conn = DriverManager.getConnection("jdbc:mariadb://" + config.sqlHost + ":" + config.sqlPort + "/" + config.sqlDatabase, config.sqlUser, config.sqlPassword);
         }
