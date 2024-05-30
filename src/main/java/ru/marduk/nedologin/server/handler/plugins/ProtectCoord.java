@@ -4,8 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.server.ServerLifecycleHooks;
-import ru.marduk.nedologin.server.capability.CapabilityLastPos;
-import ru.marduk.nedologin.server.capability.CapabilityLoader;
+import ru.marduk.nedologin.server.LastPosData;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.handler.HandlerPlugin;
 import ru.marduk.nedologin.server.handler.Login;
@@ -21,10 +20,9 @@ public final class ProtectCoord implements HandlerPlugin {
     @Override
     public void postLogin(ServerPlayer player, Login login) {
         ServerLifecycleHooks.getCurrentServer().tell(new TickTask(1, () -> {
-            Position lastPos = player.getCapability(CapabilityLoader.CAPABILITY_LAST_POS)
-                    .orElseThrow(RuntimeException::new).getLastPos();
+            Position lastPos = LastPosData.getLastPos(player);
 
-            if (lastPos.equals(CapabilityLastPos.defaultPosition)) {
+            if (lastPos.equals(LastPosData.defaultPosition)) {
                 player.setPos(login.posX, login.posY, login.posZ);
             } else {
                 player.setPos(lastPos.getX(), lastPos.getY(), lastPos.getZ());
@@ -38,7 +36,7 @@ public final class ProtectCoord implements HandlerPlugin {
         try {
             if (PlayerLoginHandler.instance().hasPlayerLoggedIn(player.getGameProfile().getName())) {
                 final Position pos = new Position(player.getX(), player.getY(), player.getZ());
-                player.getCapability(CapabilityLoader.CAPABILITY_LAST_POS).ifPresent(c -> c.setLastPos(pos));
+                LastPosData.setLastPos(player, pos);
             }
             BlockPos spawnPoint = player.getLevel().getSharedSpawnPos();
             player.setPos(spawnPoint.getX(), spawnPoint.getY(), spawnPoint.getZ());
