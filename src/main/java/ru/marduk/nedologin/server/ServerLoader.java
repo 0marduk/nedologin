@@ -35,6 +35,7 @@ public final class ServerLoader {
         PlayerLoginHandler.instance().stop();
 
         Nedologin.logger.info("Saving all entries");
-        NLStorage.instance().storageProvider.save();
+        if (NLStorage.instance() != null)
+            NLStorage.instance().storageProvider.save();
     }
 }
