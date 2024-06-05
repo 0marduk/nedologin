@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[34,)"
-license="MIT"
+license="Beerware"
 [[mods]]
 modId="nedologin"
 version="${version}"
