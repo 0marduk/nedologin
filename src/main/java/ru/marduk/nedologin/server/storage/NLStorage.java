@@ -3,6 +3,8 @@ package ru.marduk.nedologin.server.storage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.NLRegistries;
 
 @OnlyIn(Dist.DEDICATED_SERVER)
@@ -14,9 +16,14 @@ public class NLStorage {
         return INSTANCE;
     }
 
-    public static void initialize(String provider) {
+    public static void initialize(String provider, ServerStartingEvent event) {
         if (INSTANCE == null) {
-            INSTANCE = new NLStorage(provider);
+            try {
+                INSTANCE = new NLStorage(provider);
+            } catch (Exception e) {
+                Nedologin.logger.fatal("Failed to initialize login provider '{}': {}", provider, e.getMessage());
+                event.getServer().halt(false);
+            }
         }
     }
 

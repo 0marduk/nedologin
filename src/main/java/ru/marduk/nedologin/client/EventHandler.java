@@ -32,7 +32,7 @@ public final class EventHandler {
 
             buttonSetPassword = Button.builder(Component.literal("P"),
                     btn -> Minecraft.getInstance().setScreen(new SetPasswordScreen(gui)))
-                    .bounds(5, 5, 20, 20).build();
+                    .bounds(gui.width / 2 - 124, gui.height / 4 + 48, 20, 20).build();
             gui.addRenderableWidget(buttonSetPassword);
         }
     }
