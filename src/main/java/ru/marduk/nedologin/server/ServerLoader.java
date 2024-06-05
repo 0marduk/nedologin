@@ -7,7 +7,6 @@ import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.server.ServerLifecycleHooks;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.handler.PlayerLoginHandler;
 import ru.marduk.nedologin.server.storage.NLStorage;
@@ -16,6 +15,7 @@ import ru.marduk.nedologin.NLConstants;
 
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER, modid = NLConstants.MODID)
 public final class ServerLoader {
 
@@ -25,7 +25,7 @@ public final class ServerLoader {
 
     @SubscribeEvent
     public static void serverStarting(ServerStartingEvent e) throws RuntimeException {
-        NLStorage.initialize(NLConfig.SERVER.storageProvider.get());
+        NLStorage.initialize(NLConfig.SERVER.storageProvider.get(), e);
 
         PlayerLoginHandler.initLoginHandler(NLConfig.SERVER.plugins.get().stream().map(ResourceLocation::new));
     }
