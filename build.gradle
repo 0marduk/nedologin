@@ -3,11 +3,12 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id 'maven-publish'
 }
 
-version = '1.0.8'
+version = '1.20.1-1.0.8'
 group = 'ru.marduk'
-archivesBaseName = 'Nedologin-1.20.1'
+archivesBaseName = 'Nedologin'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -128,4 +129,22 @@ jar {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            jarJar.component(it)
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username "${mmuser}"
+                password "${mmpassword}"
+            }
+            url = "https://maven.marduk.ru/"
+        }
+    }
 }
