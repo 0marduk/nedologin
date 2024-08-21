@@ -20,7 +20,7 @@ public final class SetPasswordScreen extends Screen {
     private Button buttonRandom;
     private Button buttonComplete;
 
-    SetPasswordScreen(Screen parent) {
+    public SetPasswordScreen(Screen parent) {
         super(Component.translatable("nedologin.password.title"));
         this.parentScreen = parent;
     }
@@ -60,7 +60,7 @@ public final class SetPasswordScreen extends Screen {
 
     @Override
     public void tick() {
-        this.password.tick();
+        // this.password.();
     }
 
     @Override
@@ -73,7 +73,7 @@ public final class SetPasswordScreen extends Screen {
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         this.setFocused(this.password);
         this.password.setFocused(true);
-        renderBackground(gui);
+        renderBackground(gui, mouseX, mouseY, partialTicks);
 
         int middle = width / 2;
         gui.drawCenteredString(font, Component.translatable("nedologin.password.title"),

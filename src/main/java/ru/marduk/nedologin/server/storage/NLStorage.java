@@ -1,9 +1,9 @@
 package ru.marduk.nedologin.server.storage;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.server.ServerStartingEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.NLRegistries;
 
@@ -28,7 +28,7 @@ public class NLStorage {
     }
 
     private NLStorage(String provider) {
-        storageProvider = NLRegistries.STORAGE_PROVIDERS.get(new ResourceLocation(provider))
+        storageProvider = NLRegistries.STORAGE_PROVIDERS.get(ResourceLocation.parse(provider))
                 .orElseThrow(() -> new RuntimeException("Storage provider not found: " + provider))
                 .get();
     }

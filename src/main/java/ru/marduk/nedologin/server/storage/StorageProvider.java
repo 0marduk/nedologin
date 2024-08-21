@@ -1,8 +1,8 @@
 package ru.marduk.nedologin.server.storage;
 
 import net.minecraft.world.level.GameType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.IOException;

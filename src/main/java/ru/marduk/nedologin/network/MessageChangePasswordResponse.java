@@ -1,36 +1,32 @@
 package ru.marduk.nedologin.network;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import ru.marduk.nedologin.NLConstants;
 import ru.marduk.nedologin.client.PasswordHolder;
 
-import java.util.function.Supplier;
+public record MessageChangePasswordResponse(boolean success) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<MessageChangePasswordResponse> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(NLConstants.MODID, "m_change_pwd_res"));
+    public static final StreamCodec<ByteBuf, MessageChangePasswordResponse> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL,
+            MessageChangePasswordResponse::success,
+            MessageChangePasswordResponse::new
+    );
 
-public class MessageChangePasswordResponse {
-    private final boolean success;
-
-    public boolean success() {
-        return success;
-    }
-
-    public MessageChangePasswordResponse(boolean success) {
-        this.success = success;
-    }
-
-    public static void encode(MessageChangePasswordResponse msg, FriendlyByteBuf buf) {
-        buf.writeBoolean(msg.success);
-    }
-
-    public static MessageChangePasswordResponse decode(FriendlyByteBuf buf) {
-        return new MessageChangePasswordResponse(buf.readBoolean());
-    }
-
-    public static void handle(MessageChangePasswordResponse message, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(final MessageChangePasswordResponse message, final IPayloadContext ctx) {
         if (message.success()) {
             PasswordHolder.instance().applyPending();
         } else {
             PasswordHolder.instance().dropPending();
         }
-        ctx.get().setPacketHandled(true);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

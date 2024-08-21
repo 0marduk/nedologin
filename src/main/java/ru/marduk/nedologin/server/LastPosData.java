@@ -1,5 +1,6 @@
 package ru.marduk.nedologin.server;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +16,7 @@ public class LastPosData extends SavedData {
 
     @SuppressWarnings("NullableProblems")
     @Override
-    public CompoundTag save(CompoundTag compoundTag) {
+    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider pRegistries) {
         CompoundTag playersNbt = new CompoundTag();
         players.forEach((username, lastPos) -> playersNbt.put(username, lastPos.toNBT()));
 
@@ -24,7 +25,7 @@ public class LastPosData extends SavedData {
         return compoundTag;
     }
 
-    public static LastPosData loadFromNbt(CompoundTag tag) {
+    public static LastPosData loadFromNbt(CompoundTag tag, HolderLookup.Provider pRegistries) {
         LastPosData state = new LastPosData();
 
         CompoundTag playersNbt = tag.getCompound("lastPositions");
@@ -42,7 +43,7 @@ public class LastPosData extends SavedData {
     }
 
     public static LastPosData getData(MinecraftServer server) {
-        LastPosData data = server.overworld().getDataStorage().computeIfAbsent(LastPosData::loadFromNbt, LastPosData::create, NLConstants.MODID + "_positions");
+        LastPosData data = server.overworld().getDataStorage().computeIfAbsent(new Factory<LastPosData>(LastPosData::create, LastPosData::loadFromNbt), NLConstants.MODID + "_positions");
 
         data.setDirty();
 

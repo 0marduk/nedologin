@@ -1,10 +1,12 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[4,)"
 license="Beerware"
 [[mods]]
 modId="nedologin"
 version="${version}"
-displayName="NedoLogin"
+displayName="Nedologin"
 authors="marduk.ru"
 credits="SimpleLogin authors (Seraph_JACK, Yesterday17)"
-description="Auth mod based on forge."
+description="Funky auth mod."
+logoFile="icon.png"
+logoBlur=false

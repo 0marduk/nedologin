@@ -5,8 +5,9 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import ru.marduk.nedologin.network.MessageChangePassword;
 import ru.marduk.nedologin.network.NetworkLoader;
 
@@ -27,7 +28,7 @@ public final class ChangePasswordCommand {
         final var to = StringArgumentType.getString(context, "passwd");
         var msg = new MessageChangePassword(PasswordHolder.instance().password(), to);
         PasswordHolder.instance().setPendingPassword(to);
-        NetworkLoader.INSTANCE.sendToServer(msg);
+        PacketDistributor.sendToServer(msg);
         return Command.SINGLE_SUCCESS;
     }
 }

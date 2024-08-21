@@ -3,7 +3,7 @@ package ru.marduk.nedologin.server.handler.plugins;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import ru.marduk.nedologin.server.LastPosData;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.handler.HandlerPlugin;

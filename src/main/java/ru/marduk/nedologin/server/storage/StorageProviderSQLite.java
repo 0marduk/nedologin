@@ -1,6 +1,6 @@
 package ru.marduk.nedologin.server.storage;
 
-import net.minecraftforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import ru.marduk.nedologin.NLConstants;
 
 import java.sql.DriverManager;

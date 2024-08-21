@@ -1,10 +1,10 @@
 package ru.marduk.nedologin;
 
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.marduk.nedologin.command.CommandLoader;
@@ -18,11 +18,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public final class Nedologin {
     public static Logger logger = LogManager.getLogger(NLConstants.MODID);
 
-    public Nedologin() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CommandLoader::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ServerLoader::serverSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkLoader.registerPackets());
+    public Nedologin(ModContainer container) {
+        container.getEventBus().addListener(CommandLoader::commonSetup);
+        container.getEventBus().addListener(ServerLoader::serverSetup);
+        // container.getEventBus().addListener((FMLCommonSetupEvent e) -> NetworkLoader.registerPackets());
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, NLConfig.SERVER_SPEC);
+        container.registerConfig(ModConfig.Type.SERVER, NLConfig.SERVER_SPEC);
     }
 }

@@ -1,6 +1,6 @@
 package ru.marduk.nedologin;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
@@ -9,21 +9,21 @@ import java.util.List;
 
 public final class NLConfig {
     public static class Server {
-        public final ForgeConfigSpec.IntValue secs;
+        public final ModConfigSpec.IntValue secs;
 
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> whitelistCommands;
+        public final ModConfigSpec.ConfigValue<List<? extends String>> whitelistCommands;
 
-        public final ForgeConfigSpec.ConfigValue<Boolean> autoRegister;
+        public final ModConfigSpec.ConfigValue<Boolean> autoRegister;
 
-        public final ForgeConfigSpec.ConfigValue<Boolean> enableChangePassword;
+        public final ModConfigSpec.ConfigValue<Boolean> enableChangePassword;
 
-        public final ForgeConfigSpec.ConfigValue<String> storageProvider;
+        public final ModConfigSpec.ConfigValue<String> storageProvider;
 
-        public final ForgeConfigSpec.IntValue defaultGameType;
+        public final ModConfigSpec.IntValue defaultGameType;
 
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> plugins;
+        public final ModConfigSpec.ConfigValue<List<? extends String>> plugins;
 
-        Server(ForgeConfigSpec.Builder builder) {
+        Server(ModConfigSpec.Builder builder) {
             builder.push("server");
 
             autoRegister = builder
@@ -73,11 +73,11 @@ public final class NLConfig {
         }
     }
 
-    static final ForgeConfigSpec SERVER_SPEC;
+    static final ModConfigSpec SERVER_SPEC;
     public static final Server SERVER;
 
     static {
-        final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
+        final Pair<Server, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Server::new);
         SERVER_SPEC = specPair.getRight();
         SERVER = specPair.getLeft();
     }

@@ -11,8 +11,8 @@ import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.forgespi.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforgespi.Environment;
 import ru.marduk.nedologin.server.storage.NLStorage;
 
 import java.util.concurrent.CompletableFuture;

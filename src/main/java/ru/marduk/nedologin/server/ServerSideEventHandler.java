@@ -3,17 +3,14 @@ package ru.marduk.nedologin.server;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerPlayerConnection;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.CommandEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
+import net.neoforged.neoforge.event.CommandEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.server.handler.PlayerLoginHandler;
 import ru.marduk.nedologin.NLConfig;
@@ -24,14 +21,14 @@ import ru.marduk.nedologin.network.NetworkLoader;
 import java.lang.reflect.Field;
 
 @OnlyIn(Dist.DEDICATED_SERVER)
-@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER, modid = NLConstants.MODID)
+@EventBusSubscriber(value = Dist.DEDICATED_SERVER, modid = NLConstants.MODID)
 public class ServerSideEventHandler {
 
     @SubscribeEvent
     public static void playerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         PlayerLoginHandler.instance().playerJoin((ServerPlayer) event.getEntity());
-        // noinspection InstantiationOfUtilityClass
-        NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getEntity()), new MessageRequestLogin());
+        PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new MessageRequestLogin());
+        //NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getEntity()), new MessageRequestLogin());
     }
 
     @SubscribeEvent

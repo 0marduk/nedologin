@@ -4,15 +4,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import ru.marduk.nedologin.NLConstants;
 import net.minecraft.client.gui.components.Button;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = NLConstants.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = NLConstants.MODID, value = Dist.CLIENT)
 public final class EventHandler {
 
     @SubscribeEvent
@@ -24,7 +24,7 @@ public final class EventHandler {
     }
 
     @SubscribeEvent
-    public static void onGuiInit(ScreenEvent.Init event) {
+    public static void onGuiInit(ScreenEvent.Init.Pre event) {
         Screen gui = event.getScreen();
 
         if (gui instanceof TitleScreen) {
@@ -32,8 +32,9 @@ public final class EventHandler {
 
             buttonSetPassword = Button.builder(Component.literal("P"),
                     btn -> Minecraft.getInstance().setScreen(new SetPasswordScreen(gui)))
-                    .bounds(gui.width / 2 - 124, gui.height / 4 + 48, 20, 20).build();
-            gui.addRenderableWidget(buttonSetPassword);
+                    .bounds(gui.width / 2 - 124, gui.height / 4 + 56, 20, 20).build();
+
+            event.addListener(buttonSetPassword);
         }
     }
 }

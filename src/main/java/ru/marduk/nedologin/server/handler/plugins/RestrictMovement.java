@@ -2,7 +2,7 @@ package ru.marduk.nedologin.server.handler.plugins;
 
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import ru.marduk.nedologin.server.handler.HandlerPlugin;
 import ru.marduk.nedologin.server.handler.Login;
 
