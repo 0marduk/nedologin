@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
 }
 
-version = '1.21-1.0.9'
+version = "${minecraftVersion}-1.0.9"
 group = 'ru.marduk'
 archivesBaseName = 'Nedologin'
 
@@ -62,7 +62,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'net.neoforged:neoforge:21.0.143'
+    implementation 'net.neoforged:neoforge:21.1.22'
 
     jarJar 'at.favre.lib:bytes:[1.0,1.6)'
     jarJar 'at.favre.lib:bcrypt:[0.4,0.5)'
