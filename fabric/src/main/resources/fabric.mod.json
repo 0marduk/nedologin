@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "nedologin",
+  "version": "${version}",
+  "name": "Nedologin",
+  "description": "(Fork of SimpleLogin) Login/Auth mod for modded servers",
+  "authors": [
+    "marduk.ru"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "Beerware",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ru.marduk.nedologin.fabric.NedologinFabric"
+    ],
+    "server": [
+      "ru.marduk.nedologin.fabric.NedologinFabricServer"
+    ],
+    "client": [
+      "ru.marduk.nedologin.fabric.NedologinFabricClient"
+    ]
+  },
+  "mixins": [
+    "nedologin.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20.1"
+  }
+}

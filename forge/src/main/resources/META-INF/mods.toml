@@ -1,0 +1,14 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "Beerware"
+
+[[mods]]
+modId = "nedologin"
+version = "${version}"
+displayName = "Nedologin"
+authors = "marduk.ru"
+description = '''
+(Fork of SimpleLogin) Login/Auth mod for modded servers
+'''
+logoFile = "icon.png"
