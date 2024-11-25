@@ -1,7 +1,7 @@
 //file:noinspection GroovyAssignabilityCheck
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.3-SNAPSHOT" apply false
+    id "architectury-plugin" version "3.4.159"
+    id "dev.architectury.loom" version "1.7.414" apply false
 }
 
 architectury {
