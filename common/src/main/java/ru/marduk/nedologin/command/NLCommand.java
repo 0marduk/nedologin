@@ -41,7 +41,7 @@ public class NLCommand {
                         .then(Commands.literal("unload")
                                 .then(Commands.argument("plugin", ArgumentTypeHandlerPlugin.loadedPlugins())
                                         .executes(NLCommand::unloadPlugin)))
-                        .then(Commands.literal("available")
+                        .then(Commands.literal("list")
                                 .executes(NLCommand::listAvailablePlugins))
                         .then(Commands.literal("loaded")
                                 .executes(NLCommand::listLoadedPlugins)))

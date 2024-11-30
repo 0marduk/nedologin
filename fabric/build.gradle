@@ -25,6 +25,9 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    include 'at.favre.lib:bcrypt:0.10.2'
+    include 'at.favre.lib:bytes:1.6.1'
 }
 
 processResources {
