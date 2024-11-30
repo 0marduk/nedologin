@@ -49,28 +49,6 @@ public class NedologinForge {
         public static void playerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
             ServerEvents.playerLeave(event.getEntity());
         }
-
-        @SubscribeEvent
-        public static void onCommand(CommandEvent event) {
-            String command = event.getParseResults().getReader().getString();
-            if (command.startsWith("/")) command = command.substring(1);
-            Nedologin.logger.debug("Checking command '{}'", command);
-            CommandSource realSource = event.getParseResults().getContext().getSource().source;
-            if (!(realSource instanceof ServerPlayer cast)) {
-                return;
-            }
-            if (PlayerLoginHandler.instance().hasPlayerLoggedIn(cast.getScoreboardName())) {
-                return;
-            }
-
-            if (Arrays.asList(NLConfig.INSTANCE.whitelistCommands).contains(command)) {
-                return;
-            }
-
-            Nedologin.logger.warn("Denied {} to execute command '{}' before login",
-                    event.getParseResults().getContext().getSource().getTextName(), command);
-            event.setCanceled(true);
-        }
     }
 
     @Mod.EventBusSubscriber(modid = NLConstants.MODID)
