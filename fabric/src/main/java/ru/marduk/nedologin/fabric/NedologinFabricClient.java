@@ -14,7 +14,6 @@ public class NedologinFabricClient implements ClientModInitializer {
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> ClientEvents.onJoinServer());
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> ClientEvents.onClientRegisterCommand(dispatcher));
-        ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> ClientEvents.onGuiOpen(screen));
         ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> ClientEvents.onGuiInit(screen));
     }
 }
