@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class LastPosData extends SavedData {
     public static final Position defaultPosition = new Position(0, 255, 0);
-    public HashMap<String, Position> players = new HashMap<>();
+    public final HashMap<String, Position> players = new HashMap<>();
 
     @SuppressWarnings("NullableProblems")
     @Override

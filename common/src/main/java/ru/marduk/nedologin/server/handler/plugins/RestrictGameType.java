@@ -11,16 +11,12 @@ import ru.marduk.nedologin.server.storage.NLStorage;
 public final class RestrictGameType implements HandlerPlugin {
     @Override
     public void preLogin(ServerPlayer player, Login login) {
-        Service.PLATFORM.getServer().tell(new TickTask(1, () -> {
-            player.setGameMode(GameType.SPECTATOR);
-        }));
+        Service.PLATFORM.getServer().tell(new TickTask(1, () -> player.setGameMode(GameType.SPECTATOR)));
     }
 
     @Override
     public void postLogin(ServerPlayer player, Login login) {
-        Service.PLATFORM.getServer().tell(new TickTask(1, () -> {
-            player.setGameMode(NLStorage.instance().storageProvider.gameType(player.getGameProfile().getName().toLowerCase()));
-        }));
+        Service.PLATFORM.getServer().tell(new TickTask(1, () -> player.setGameMode(NLStorage.instance().storageProvider.gameType(player.getGameProfile().getName().toLowerCase()))));
     }
 
     @Override

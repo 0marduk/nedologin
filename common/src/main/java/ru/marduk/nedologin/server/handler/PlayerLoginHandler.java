@@ -39,9 +39,7 @@ public final class PlayerLoginHandler {
     public void loadPlugin(ResourceLocation rl) {
         if (this.plugins.containsKey(rl)) return;
         Nedologin.logger.info("Loading plugin {}", rl.toString());
-        HandlerPlugin plugin = NLRegistries.PLUGINS.get(rl).orElseThrow(() -> {
-            return new IllegalArgumentException("No such plugin found: " + rl);
-        }).get();
+        HandlerPlugin plugin = NLRegistries.PLUGINS.get(rl).orElseThrow(() -> new IllegalArgumentException("No such plugin found: " + rl)).get();
 
         // Should not be possible though
         Optional.ofNullable(this.plugins.put(rl, plugin)).ifPresent(HandlerPlugin::disable);

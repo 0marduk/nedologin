@@ -15,6 +15,7 @@ import ru.marduk.nedologin.server.handler.PlayerLoginHandler;
 
 import java.util.Arrays;
 
+@SuppressWarnings("CancellableInjectionUsage") // IDE plugin bug ig, it gets cancelled on line 41
 @Mixin(Commands.class)
 public class MixinCommands {
     @Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)

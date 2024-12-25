@@ -10,7 +10,7 @@ import ru.marduk.nedologin.server.storage.NLStorage;
 import java.util.Arrays;
 
 public final class Nedologin {
-    public static Logger logger = LogManager.getLogger(NLConstants.MODID);
+    public static final Logger logger = LogManager.getLogger(NLConstants.MODID);
 
     public static void CommonInit() {
         CommandLoader.argumentRegister();

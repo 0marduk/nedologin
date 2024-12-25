@@ -2,7 +2,6 @@ package ru.marduk.nedologin.fabric;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerLoginConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.fabric.network.NetworkLoaderServer;

@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 public class NetworkLoader {
     private static final String PROTOCOL_VERSION = "1.1";
 
-    public static SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
+    public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(NLConstants.MODID, "main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,

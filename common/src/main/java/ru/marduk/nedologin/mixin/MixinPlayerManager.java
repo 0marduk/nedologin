@@ -22,11 +22,11 @@ import java.net.SocketAddress;
 public class MixinPlayerManager {
 
     @Unique
-    private final PlayerList playerList = (PlayerList) (Object) this;
+    private final PlayerList nedologin$playerList = (PlayerList) (Object) this;
 
     @Inject(method = "canPlayerLogin", at = @At("HEAD"), cancellable = true)
     private void canPlayerLogin(SocketAddress pSocketAddress, GameProfile pGameProfile, CallbackInfoReturnable<Component> cir) {
-        ServerPlayer onlinePlayer = playerList.getPlayerByName(pGameProfile.getName());
+        ServerPlayer onlinePlayer = nedologin$playerList.getPlayerByName(pGameProfile.getName());
 
         if (onlinePlayer != null) {
             cir.setReturnValue(Component.literal("Someone is already playing with that nickname."));

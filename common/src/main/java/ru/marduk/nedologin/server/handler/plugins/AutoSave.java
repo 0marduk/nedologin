@@ -25,7 +25,7 @@ public final class AutoSave implements HandlerPlugin {
                 } catch (IOException e) {
                     Nedologin.logger.error("Failed saving nedologin entries", e);
                 }
-                Nedologin.logger.info("Done! Took " + (System.currentTimeMillis() - start) + "ms.");
+                Nedologin.logger.info("Done! Took {} ms.", System.currentTimeMillis() - start);
             }
         }, 0, 5, TimeUnit.MINUTES);
     }

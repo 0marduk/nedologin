@@ -10,6 +10,7 @@ import ru.marduk.nedologin.platform.Service;
 import static net.minecraft.commands.Commands.*;
 
 public final class ChangePasswordCommand {
+    // I'm using a raw parameterized class because fabric & forge have different dispatchers that quite frankly don't extend/implement the same doohickey
     public static void register(CommandDispatcher dispatcher) {
         var theCommand =
                 literal("nedologin")

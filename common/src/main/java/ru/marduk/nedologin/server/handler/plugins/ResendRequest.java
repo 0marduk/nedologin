@@ -23,9 +23,7 @@ public final class ResendRequest implements HandlerPlugin {
 
     @Override
     public void preLogin(ServerPlayer player, Login login) {
-        ScheduledFuture<?> future = executor.scheduleWithFixedDelay(() -> {
-            Service.NETWORK.SendMessageRequestLogin(player);
-        }, 0, 5, TimeUnit.SECONDS);
+        ScheduledFuture<?> future = executor.scheduleWithFixedDelay(() -> Service.NETWORK.SendMessageRequestLogin(player), 0, 5, TimeUnit.SECONDS);
         Optional.ofNullable(futures.put(login.name, future)).ifPresent(f -> f.cancel(true));
     }
 

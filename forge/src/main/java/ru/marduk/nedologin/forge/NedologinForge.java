@@ -1,12 +1,9 @@
 package ru.marduk.nedologin.forge;
 
-import net.minecraft.commands.CommandSource;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -15,16 +12,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import ru.marduk.nedologin.NLConfig;
 import ru.marduk.nedologin.NLConstants;
 import ru.marduk.nedologin.Nedologin;
 import ru.marduk.nedologin.client.ClientEvents;
 import ru.marduk.nedologin.command.CommandLoader;
 import ru.marduk.nedologin.forge.network.NetworkLoader;
 import ru.marduk.nedologin.server.ServerEvents;
-import ru.marduk.nedologin.server.handler.PlayerLoginHandler;
-
-import java.util.Arrays;
 
 @Mod(NLConstants.MODID)
 public class NedologinForge {
@@ -74,11 +67,6 @@ public class NedologinForge {
         @SubscribeEvent
         public static void onClientRegisterCommand(RegisterClientCommandsEvent event) {
             ClientEvents.onClientRegisterCommand(event.getDispatcher());
-        }
-
-        @SubscribeEvent
-        public static void onGuiOpen(ScreenEvent.Opening event) {
-            ClientEvents.onGuiOpen(event.getScreen());
         }
 
         @SubscribeEvent

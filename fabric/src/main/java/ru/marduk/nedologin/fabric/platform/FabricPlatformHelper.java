@@ -5,7 +5,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import ru.marduk.nedologin.NLConstants;
 import ru.marduk.nedologin.platform.IPlatformHelper;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
